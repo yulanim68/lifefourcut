@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f3ed">
+    <meta name="description" content="브라우저에서 사진을 촬영하고 임시 보관하는 인생네컷 촬영 앱입니다.">
+    <title>인생네컷 사진 촬영</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/main.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <a class="brand" href="./" aria-label="인생네컷 시작 화면">인생네컷</a>
+        <button class="button button-quiet" id="open-gallery" type="button">보관함</button>
+      </header>
+
+      <section class="screen welcome-screen" id="screen-ready" aria-labelledby="welcome-title">
+        <p class="eyebrow">나만의 순간을 담아보세요</p>
+        <h1 id="welcome-title">오늘의 모습을<br>사진으로 남겨요</h1>
+        <p class="description">카메라를 켜고 촬영 버튼을 누르면 5초 뒤 사진이 찍혀요.</p>
+        <button class="button button-primary button-large" id="start-camera" type="button">카메라 시작</button>
+        <p class="privacy-note">카메라와 사진은 이 기기에서만 사용돼요. 사진은 임시 보관되며 필요한 사진은 다운로드해 주세요.</p>
+      </section>
+
+      <section class="screen" id="screen-preview" aria-labelledby="preview-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">준비되셨나요?</p>
+          <h1 id="preview-title">촬영 화면</h1>
+        </div>
+        <div class="camera-stage">
+          <video id="camera-preview" autoplay playsinline muted aria-label="카메라 실시간 미리보기"></video>
+          <div class="countdown-overlay" id="countdown" role="status" aria-live="assertive" aria-atomic="true" hidden></div>
+        </div>
+        <p class="hint">촬영 버튼을 누르면 5초 카운트다운이 시작돼요.</p>
+        <button class="button button-primary button-large" id="take-photo" type="button">촬영</button>
+      </section>
+
+      <section class="screen" id="screen-result" aria-labelledby="result-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">찰칵!</p>
+          <h1 id="result-title">촬영한 사진</h1>
+        </div>
+        <div class="result-frame">
+          <img id="result-photo" alt="방금 촬영한 사진">
+        </div>
+        <p class="hint">사진은 보관함에 임시로 저장됐어요.</p>
+        <button class="button button-primary button-large" id="retake-photo" type="button">다시 촬영</button>
+      </section>
+
+      <section class="screen" id="screen-gallery" aria-labelledby="gallery-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">이 기기에 임시 보관</p>
+          <h1 id="gallery-title">사진 보관함</h1>
+        </div>
+        <p class="privacy-note gallery-note">촬영한 사진은 임시 보관됩니다. 새로고침하거나 페이지를 닫으면 사라지니 필요한 사진은 다운로드해 주세요.</p>
+        <p class="empty-state" id="gallery-empty">아직 사진이 없어요.<br>카메라로 첫 사진을 찍어보세요.</p>
+        <div class="gallery-grid" id="gallery-list" aria-label="촬영한 사진 목록"></div>
+        <button class="button button-secondary" id="gallery-camera" type="button">촬영 화면으로</button>
+      </section>
+
+      <section class="screen detail-screen" id="screen-detail" aria-labelledby="detail-title" hidden>
+        <div class="detail-heading">
+          <button class="button button-quiet" id="detail-back" type="button">보관함</button>
+          <h1 id="detail-title">사진 상세</h1>
+          <button class="button button-download" id="download-photo" type="button" aria-label="선택한 사진 다운로드">다운로드</button>
+        </div>
+        <div class="detail-frame">
+          <img id="detail-photo" alt="선택한 사진">
+        </div>
+        <p class="photo-date" id="detail-date"></p>
+      </section>
+
+      <section class="screen error-screen" id="screen-error" aria-labelledby="error-title" hidden>
+        <p class="eyebrow">문제가 발생했어요</p>
+        <h1 id="error-title">다시 시도해 주세요</h1>
+        <p class="error-message" id="error-message" role="alert"></p>
+        <button class="button button-primary" id="retry-action" type="button">다시 시도</button>
+        <button class="button button-quiet" id="error-gallery" type="button">보관함 보기</button>
+      </section>
+
+      <footer class="app-footer">
+        <p>사진은 브라우저 메모리에만 임시 보관되며 외부로 전송되지 않아요.</p>
+      </footer>
+    </main>
+  </body>
+</html>
